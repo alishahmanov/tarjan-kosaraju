@@ -11,9 +11,11 @@ public class DAGLongestPath {
     public static final class Result {
         public final int[] dist;
         public final int[] parent;
-        public Result(int[] dist, int[] parent) {
+        public final int relaxations;
+        public Result(int[] dist, int[] parent, int relaxations) {
             this.dist = dist;
             this.parent = parent;
+            this.relaxations = relaxations;
         }
         public List<Integer> reconstructPath(int source, int target) {
             if (dist[target] <= NEG_INF) return List.of();
@@ -36,6 +38,7 @@ public class DAGLongestPath {
         int n = dagW.size();
         int[] dist = new int[n];
         int[] parent = new int[n];
+        int relax = 0;
         for (int i = 0; i < n; i++) { dist[i] = NEG_INF; parent[i] = -1; }
         dist[source] = 0;
         for (int u : topo) {
@@ -46,9 +49,10 @@ public class DAGLongestPath {
                 if (dist[v] < dist[u] + w) {
                     dist[v] = dist[u] + w;
                     parent[v] = u;
+                    relax++;
                 }
             }
         }
-        return new Result(dist, parent);
+        return new Result(dist, parent, relax);
     }
 }

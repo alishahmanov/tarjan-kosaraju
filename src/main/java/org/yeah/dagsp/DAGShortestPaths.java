@@ -1,4 +1,3 @@
-
 package org.yeah.dagsp;
 
 import java.util.ArrayList;
@@ -12,9 +11,11 @@ public class DAGShortestPaths {
     public static final class Result {
         public final int[] dist;
         public final int[] parent;
-        public Result(int[] dist, int[] parent) {
+        public final int relaxations;
+        public Result(int[] dist, int[] parent, int relaxations) {
             this.dist = dist;
             this.parent = parent;
+            this.relaxations = relaxations;
         }
         public List<Integer> reconstructPath(int source, int target) {
             if (dist[target] >= INF) return List.of();
@@ -32,9 +33,9 @@ public class DAGShortestPaths {
         int n = dagW.size();
         int[] dist = new int[n];
         int[] parent = new int[n];
+        int relax = 0;
         for (int i = 0; i < n; i++) { dist[i] = INF; parent[i] = -1; }
         dist[source] = 0;
-
         for (int u : topo) {
             if (dist[u] >= INF) continue;
             for (EdgeWLike e : dagW.get(u)) {
@@ -43,10 +44,11 @@ public class DAGShortestPaths {
                 if (dist[v] > dist[u] + w) {
                     dist[v] = dist[u] + w;
                     parent[v] = u;
+                    relax++;
                 }
             }
         }
-        return new Result(dist, parent);
+        return new Result(dist, parent, relax);
     }
 
     public interface EdgeWLike {
