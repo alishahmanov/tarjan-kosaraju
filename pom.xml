@@ -52,6 +52,27 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>app</id>
+                        <goals><goal>java</goal></goals>
+                        <configuration>
+                            <mainClass>org.yeah.app.Main</mainClass>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>batch</id>
+                        <goals><goal>java</goal></goals>
+                        <configuration>
+                            <mainClass>org.yeah.runner.BatchRunner</mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
