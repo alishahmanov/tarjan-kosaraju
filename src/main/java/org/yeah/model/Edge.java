@@ -1,4 +1,3 @@
 package org.yeah.model;
 
-public class Edge {
-}
+public record Edge(int u, int v, int w) {}
