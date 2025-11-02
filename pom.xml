@@ -12,6 +12,9 @@
         <maven.compiler.release>17</maven.compiler.release>
         <junit.version>5.10.2</junit.version>
         <gson.version>2.11.0</gson.version>
+        <maven.compiler.plugin.version>3.13.0</maven.compiler.plugin.version>
+        <maven.surefire.plugin.version>3.2.5</maven.surefire.plugin.version>
+        <exec.maven.plugin.version>3.3.0</exec.maven.plugin.version>
     </properties>
 
     <dependencies>
@@ -31,42 +34,41 @@
 
     <build>
         <plugins>
+            <!-- Компиляция под JDK 17 -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
+                <version>${maven.compiler.plugin.version}</version>
                 <configuration>
                     <release>${maven.compiler.release}</release>
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.3.0</version>
-                <configuration>
-                    <mainClass>org.yeah.app.Main</mainClass>
-                </configuration>
-            </plugin>
-
+            <!-- Тесты (JUnit Platform) -->
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.2.5</version>
+                <version>${maven.surefire.plugin.version}</version>
             </plugin>
+
+            <!-- Запуски приложения -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>${exec.maven.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>app</id>
-                        <goals><goal>java</goal></goals>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
                         <configuration>
                             <mainClass>org.yeah.app.Main</mainClass>
                         </configuration>
                     </execution>
                     <execution>
                         <id>batch</id>
-                        <goals><goal>java</goal></goals>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
                         <configuration>
                             <mainClass>org.yeah.runner.BatchRunner</mainClass>
                         </configuration>

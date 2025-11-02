@@ -1,2 +1,2 @@
 Dataset,n,edges,SCC_count,SCC_time_ns,Topo_time_ns,SP_relax,SP_time_ns,LP_relax,LP_time_ns
-data/sample.json,8,7,6,139000,11125,3,185208,3,160959
+data/sample.json,8,7,6,67500,11458,3,96750,3,49291
