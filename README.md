@@ -150,3 +150,15 @@ Analysis
 - Density sensitivity: Here m/n ≈ 0.88 (sparse). Denser DAGs typically increase relaxation counts and thus SP/LP_time_ns; sparser graphs keep them lower.
 
 - Practical takeaway: When SCC_count ≈ n, SCC time is low and DP phases dominate. For inputs with larger SCCs, SCC time grows but the condensation shrinks the problem, often keeping SP/LP efficient overall.
+
+## Conclusions
+
+- Use SCC → condensation first; then run all DP on the DAG.
+
+- For edge weights, SSSP/LP along topo order is optimal and simple.
+
+- For node durations, use node-splitting or a dedicated pass (future work).
+
+- Prefer batch runs + CSV on larger graphs to profile structure-dependent costs.
+
+- Keep datasets & results versioned for reproducibility.
